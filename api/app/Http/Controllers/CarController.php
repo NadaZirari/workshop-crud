@@ -76,8 +76,22 @@ class CarController extends Controller
     }
 
 
+   
     /**
-     * Remove the specified resource from storage.
+     * @OA\Delete(
+     *     path="/api/cars/{id}",
+     *     summary="Supprimer une voiture",
+     *     tags={"Cars"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID de la voiture",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(response=204, description="Voiture supprimée"),
+     *     @OA\Response(response=404, description="Voiture non trouvée")
+     * )
      */
     public function destroy($id)
     {
