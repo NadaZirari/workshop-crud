@@ -34,18 +34,26 @@ class CarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $car = Car::find($id);
+        return $car ? response()->json($car, 200) : response()->json(['message' => 'Voiture non trouvée'], 404);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $car = Car::find($id);
+        if (!$car) {
+            return response()->json(['message' => 'Voiture non trouvée'], 404);
+        }
+
+        $car->update($request->all());
+        return response()->json($car, 200);
     }
+    
 
     /**
      * Remove the specified resource from storage.
