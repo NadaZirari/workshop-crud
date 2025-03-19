@@ -61,8 +61,31 @@ class CarController extends Controller
         return $car ? response()->json($car, 200) : response()->json(['message' => 'Voiture non trouvée'], 404);
     }
 
-    /**
-     * Update the specified resource in storage.
+     /**
+     * @OA\Put(
+     *     path="/api/cars/{id}",
+     *     summary="Mettre à jour une voiture",
+     *     tags={"Cars"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID de la voiture",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"brand", "model", "year", "price_per_day"},
+     *             @OA\Property(property="brand", type="string"),
+     *             @OA\Property(property="model", type="string"),
+     *             @OA\Property(property="year", type="integer"),
+     *             @OA\Property(property="price_per_day", type="number", format="float")
+     *         )
+     *     ),
+     *     @OA\Response(response=200, description="Voiture mise à jour"),
+     *     @OA\Response(response=404, description="Voiture non trouvée")
+     * )
      */
     public function update(Request $request, $id)
     {
