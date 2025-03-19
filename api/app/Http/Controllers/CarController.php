@@ -53,13 +53,19 @@ class CarController extends Controller
         $car->update($request->all());
         return response()->json($car, 200);
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $car = Car::find($id);
+        if (!$car) {
+            return response()->json(['message' => 'Voiture non trouvée'], 404);
+        }
+
+        $car->delete();
+        return response()->json(null, 204);
     }
 }
