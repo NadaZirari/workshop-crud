@@ -69,6 +69,91 @@
                     }
                 }
             }
+        },
+        "/api/cars/{id}": {
+            "put": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Mettre à jour une voiture",
+                "operationId": "1d232cedb5f39024dccd947cddd10087",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la voiture",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "brand",
+                                    "model",
+                                    "year",
+                                    "price_per_day"
+                                ],
+                                "properties": {
+                                    "brand": {
+                                        "type": "string"
+                                    },
+                                    "model": {
+                                        "type": "string"
+                                    },
+                                    "year": {
+                                        "type": "integer"
+                                    },
+                                    "price_per_day": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Voiture mise à jour"
+                    },
+                    "404": {
+                        "description": "Voiture non trouvée"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cars"
+                ],
+                "summary": "Supprimer une voiture",
+                "operationId": "802b64f09e484fbb1bb3817362d30cc9",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID de la voiture",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Voiture supprimée"
+                    },
+                    "404": {
+                        "description": "Voiture non trouvée"
+                    }
+                }
+            }
         }
     },
     "tags": [
