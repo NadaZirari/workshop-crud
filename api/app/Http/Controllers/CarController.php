@@ -6,16 +6,37 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
+     /**
+     * @OA\Get(
+     *     path="/api/cars",
+     *     summary="Lister toutes les voitures",
+     *     tags={"Cars"},
+     *     @OA\Response(response=200, description="Liste des voitures")
+     * )
      */
+    
     public function index()
     {
         return response()->json(Car::all(), 200);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @OA\Post(
+     *     path="/api/cars",
+     *     summary="Créer une voiture",
+     *     tags={"Cars"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"brand", "model", "year", "price_per_day"},
+     *             @OA\Property(property="brand", type="string"),
+     *             @OA\Property(property="model", type="string"),
+     *             @OA\Property(property="year", type="integer"),
+     *             @OA\Property(property="price_per_day", type="number", format="float")
+     *         )
+     *     ),
+     *     @OA\Response(response=201, description="Voiture créée")
+     * )
      */
     public function store(Request $request)
     {
